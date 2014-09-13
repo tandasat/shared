@@ -10,7 +10,6 @@ if has("gui_running")
     autocmd VIMLeave * :mksession! ~/.vim/.session.vim
 
     if has("gui_win32")
-        " Set font for gVim
         set guifont=MeiryoKe_Console:h9
     elseif has("gui_gtk2")
         set guifont=Monospace\ 9
@@ -19,25 +18,16 @@ if has("gui_running")
     endif
 endif
 
-" Cursor
-"highlight Cursor guifg=black guibg=black
-"highlight iCursor guifg=black guibg=black
-"set guicursor=n-v-c:block-Cursor
-"set guicursor+=i:ver100-iCursor
-"set guicursor+=n-v-c:blinkon0
-"set guicursor+=i:blinkwait10
-
 "" Folding
-set foldlevelstart=99           " Don't fold anything when opening a new file
+set foldlevelstart=99   " Don't fold anything when opening a new file
 
 "" Backup and undo settings
-set backupdir=~/.vim/  " backup//   " location of backups
-set directory=~/.vim/  " swp//      " location of swap files
+set backupdir=~/.vim/   " location of backups
+set directory=~/.vim/   " location of swap files
 set undofile
-set undodir=~/.vim/    " undo//
-set undolevels=9000             " maximum number of changes that can be undone
-set undoreload=9000             " maximum number lines to save for undo on a
-                                " buffer reload
+set undodir=~/.vim/
+set undolevels=9000     " maximum number of changes that can be undone
+set undoreload=9000     " maximum number lines to save for undo
 
 " Enable spell checking
 setlocal spell spelllang=en_us
