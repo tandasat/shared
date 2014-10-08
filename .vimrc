@@ -4,13 +4,17 @@
 syntax on
 
 if has("gui_running")
-    " Remember window positions and sizes (gVim)
     set sessionoptions+=resize,winpos
-    autocmd VIMEnter * :source ~/.vim/.session.vim
+
+    if filereadable(expand('~/.vim/.session.vim'))
+        autocmd VIMEnter * :source ~/.vim/.session.vim
+    endif
     autocmd VIMLeave * :mksession! ~/.vim/.session.vim
+    autocmd VIMenter * :bfirst
+    autocmd BufLeave * :mksession! ~/.vim/.session.vim
 
     if has("gui_win32")
-        set guifont=MeiryoKe_Console:h9
+        set guifont=Consolas:h10
     elseif has("gui_gtk2")
         set guifont=Monospace\ 9
     elseif has("gui_macvim")
@@ -29,7 +33,7 @@ if has('persistent_undo')
     set undodir=~/.vim/
     set undolevels=9000     " maximum number of changes that can be undone
     set undoreload=9000     " maximum number lines to save for undo
-end
+endif
 
 " Enable spell checking
 setlocal spell spelllang=en_us
@@ -130,13 +134,11 @@ au BufNewFile,BufRead * match ZenkakuSpace /　/
 " Close current buffer without closing the window
 command Bd bp | sp | bn | bd
 
-if filereadable(expand(  '~/.vim/bundle/neobundle.vim/README.md'))
+if filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
     " ----------------------------------------------
     " NeoBundle Scripts-----------------------------
     "
     if has('vim_starting')
-        "set nocompatible               " Be iMproved
-
         " Required:
         set runtimepath+=~/.vim/bundle/neobundle.vim/
     endif
@@ -207,9 +209,9 @@ if filereadable(expand(  '~/.vim/bundle/neobundle.vim/README.md'))
     " <CR>: close popup and save indent.
     inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
     function! s:my_cr_function()
-      return neocomplete#close_popup() . "\<CR>"
+      "return neocomplete#close_popup() . "\<CR>"
       " For no inserting <CR> key.
-      "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+      return pumvisible() ? neocomplete#close_popup() : "\<CR>"
     endfunction
     " <TAB>: completion.
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -219,7 +221,7 @@ if filereadable(expand(  '~/.vim/bundle/neobundle.vim/README.md'))
     inoremap <expr><C-y>  neocomplete#close_popup()
     inoremap <expr><C-e>  neocomplete#cancel_popup()
     " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+    inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
     " For cursor moving in insert mode(Not recommended)
     "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
@@ -263,4 +265,3 @@ if filereadable(expand(  '~/.vim/bundle/neobundle.vim/README.md'))
     " The end of NeoComplete settings
     " ----------------------------------------------------------------------------
 endif
-
