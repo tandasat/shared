@@ -4,14 +4,15 @@
 syntax on
 
 if has("gui_running")
-    set sessionoptions+=resize,winpos
-
-    if filereadable(expand('~/.vim/.session.vim'))
-        autocmd VIMEnter * :source ~/.vim/.session.vim
-    endif
-    autocmd VIMLeave * :mksession! ~/.vim/.session.vim
-    autocmd VIMenter * :bfirst
-    autocmd BufLeave * :mksession! ~/.vim/.session.vim
+    " set sessionoptions+=resize,winpos
+    " if filereadable(expand('~/.vim/.session.vim'))
+    "     autocmd VIMEnter * :source ~/.vim/.session.vim
+    " endif
+    " autocmd VIMLeave * :mksession! ~/.vim/.session.vim
+    " autocmd VIMenter * :bfirst
+    " autocmd BufLeave * :mksession! ~/.vim/.session.vim
+    " autocmd BufReadPost * tab ball
+    " autocmd BufReadPost * :bfirst
 
     if has("gui_win32")
         set guifont=Consolas:h10
@@ -134,6 +135,10 @@ au BufNewFile,BufRead * match ZenkakuSpace /　/
 " Close current buffer without closing the window
 command Bd bp | sp | bn | bd
 
+" Taglist
+let Tlist_Show_One_File = 1     " Only shows functions in the current file
+let Tlist_Exit_OnlyWindow = 1   " Close the Taglist windows when it is the last
+
 if filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
     " ----------------------------------------------
     " NeoBundle Scripts-----------------------------
@@ -157,6 +162,7 @@ if filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
     NeoBundle 'kien/ctrlp.vim'
     NeoBundle 'flazz/vim-colorschemes'
     NeoBundle 'Shougo/neocomplete'
+    NeoBundle 'taglist.vim'
 
     " You can specify revision/branch/tag.
     NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -221,7 +227,7 @@ if filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
     inoremap <expr><C-y>  neocomplete#close_popup()
     inoremap <expr><C-e>  neocomplete#cancel_popup()
     " Close popup by <Space>.
-    inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+    "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
     " For cursor moving in insert mode(Not recommended)
     "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
