@@ -80,9 +80,47 @@ set fileformats=unix,dos,mac
 
 " Formatting
 set tabstop=4
+
 set shiftwidth=4
-set expandtab
 set softtabstop=4
+set expandtab
+
+" Switch tab representation between space and \t
+function TabToggle()
+    if &expandtab
+        echo "Tab = \\t"
+        set shiftwidth=4
+        set softtabstop=0
+        set noexpandtab
+    else
+        echo "Tab = 4 spaces"
+        set shiftwidth=4
+        set softtabstop=4
+        set expandtab
+    endif
+endfunction
+nmap <F9> mz:execute TabToggle()<CR>'z
+
+" Change tab width
+function TabWidth(width)
+    echo "Tab width = " . a:width
+    let &tabstop=a:width
+    let &shiftwidth=a:width
+    let &softtabstop=a:width
+endfunction
+
+" Switch tab width between 2, 4 or 8
+function TabWidthSwitch()
+    if &tabstop == 4
+        call TabWidth(8)
+    elseif &tabstop == 8
+        call TabWidth(2)
+    else
+        call TabWidth(4)
+    endif
+endfunction
+nmap <F8> mz:execute TabWidthSwitch()<CR>'z
+
 
 set ruler
 set title
