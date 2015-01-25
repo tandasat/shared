@@ -1,2 +1,17 @@
-set guifont=Consolas:h10
+set lines=40
+set columns=90
+
+if has("gui_win32")
+    set guifont=Consolas:h10
+    " Clipboard
+    nnoremap y "+y
+    vnoremap y "+y
+    nnoremap g "+gP
+    vnoremap g "+gP
+    set clipboard=unnamedplus
+elseif has("gui_gtk2")
+    set guifont=Monospace\ 9
+elseif has("gui_macvim")
+    set guifont=Menlo\ Regular:h12
+endif
 

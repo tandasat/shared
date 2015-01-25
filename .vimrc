@@ -3,26 +3,6 @@
 "
 syntax on
 
-if has("gui_running")
-    set lines=40
-    set columns=90
-
-    if has("gui_win32")
-        set guifont=Consolas:h10
-    elseif has("gui_gtk2")
-        set guifont=Monospace\ 9
-    elseif has("gui_macvim")
-        set guifont=Menlo\ Regular:h12
-    endif
-endif
-
-" Clipboard
-nnoremap y "+y
-vnoremap y "+y
-nnoremap g "+gP
-vnoremap g "+gP
-set clipboard=unnamedplus
-
 " Folding
 set foldlevelstart=99   " Don't fold anything when opening a new file
 
