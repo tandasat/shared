@@ -4,15 +4,8 @@
 syntax on
 
 if has("gui_running")
-    " set sessionoptions+=resize,winpos
-    " if filereadable(expand('~/.vim/.session.vim'))
-    "     autocmd VIMEnter * :source ~/.vim/.session.vim
-    " endif
-    " autocmd VIMLeave * :mksession! ~/.vim/.session.vim
-    " autocmd VIMenter * :bfirst
-    " autocmd BufLeave * :mksession! ~/.vim/.session.vim
-    " autocmd BufReadPost * tab ball
-    " autocmd BufReadPost * :bfirst
+    set lines=40
+    set columns=90
 
     if has("gui_win32")
         set guifont=Consolas:h10
@@ -23,10 +16,17 @@ if has("gui_running")
     endif
 endif
 
-"" Folding
+" Clipboard
+nnoremap y "+y
+vnoremap y "+y
+nnoremap g "+gP
+vnoremap g "+gP
+set clipboard=unnamedplus
+
+" Folding
 set foldlevelstart=99   " Don't fold anything when opening a new file
 
-"" Backup and undo settings
+" Backup and undo settings
 set backupdir=~/.vim/   " location of backups
 set directory=~/.vim/   " location of swap files
 if has('persistent_undo')
